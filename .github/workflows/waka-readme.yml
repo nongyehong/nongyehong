@@ -18,7 +18,6 @@ jobs:
           # 时间线
           SHOW_LOC_CHART: False
           SHOW_TITLE: true
-          BLOCKS: ░▒▓█
           TIME_RANGE: last_year
           SHOW_TIME: true
           SHOW_MASKED_TIME: true
