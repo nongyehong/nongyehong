@@ -3,7 +3,7 @@
 <!--START_SECTION:waka-->
 
 ```txt
-From: 12 September 2024 - To: 12 September 2025
+From: 13 September 2024 - To: 13 September 2025
 
 Total Time: 407 hrs 23 mins
 
