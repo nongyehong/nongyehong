@@ -3,15 +3,15 @@
 <!--START_SECTION:waka-->
 
 ```txt
-From: 30 June 2025 - To: 30 June 2026
+From: 01 July 2025 - To: 01 July 2026
 
-Total Time: 2,120 hrs 31 mins
+Total Time: 2,116 hrs 16 mins
 
-Rust                 804 hrs 1 min         █████████▒░░░░░░░░░░░░░░░   37.92 %
-Vue.js               438 hrs 30 mins       █████▒░░░░░░░░░░░░░░░░░░░   20.68 %
-Markdown             259 hrs 39 mins       ███░░░░░░░░░░░░░░░░░░░░░░   12.25 %
-TypeScript           190 hrs 23 mins       ██▒░░░░░░░░░░░░░░░░░░░░░░   08.98 %
-Other                141 hrs 45 mins       █▓░░░░░░░░░░░░░░░░░░░░░░░   06.68 %
+Rust                 804 hrs 1 min         █████████▒░░░░░░░░░░░░░░░   37.99 %
+Vue.js               436 hrs 50 mins       █████░░░░░░░░░░░░░░░░░░░░   20.64 %
+Markdown             259 hrs 34 mins       ███░░░░░░░░░░░░░░░░░░░░░░   12.27 %
+TypeScript           187 hrs 53 mins       ██▒░░░░░░░░░░░░░░░░░░░░░░   08.88 %
+Other                141 hrs 45 mins       █▓░░░░░░░░░░░░░░░░░░░░░░░   06.70 %
 ```
 
 <!--END_SECTION:waka-->
