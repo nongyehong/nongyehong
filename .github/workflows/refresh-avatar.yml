@@ -28,7 +28,7 @@ jobs:
         run: python scripts/build_profile.py --refresh-avatar --username "$PROFILE_OWNER"
       - name: Save only changed avatar assets
         run: |
-          git add assets/avatar.png assets/hero-light.svg assets/hero-dark.svg
+          git add assets/avatar.png assets/hero.svg
           if git diff --cached --quiet; then exit 0; fi
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'

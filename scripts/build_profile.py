@@ -21,6 +21,12 @@ THEMES = {
     "dark": dict(bg="#121212", panel="#181818", fg="#f2f2f2", secondary="#b4b4b4", muted="#8c8c8c", border="#2b2b2b", soft="#1f1f1f", red="#e0525b"),
 }
 
+# Embedded SVG media queries inherit the host element's actual color-scheme.
+# This also covers GitHub auto mode with both day and night themes set to dark.
+THEME_CSS = ":root{" + ";".join(f"--{key}:{value}" for key,value in THEMES["light"].items()) + "}"
+THEME_CSS += "@media(prefers-color-scheme:dark){:root{" + ";".join(f"--{key}:{value}" for key,value in THEMES["dark"].items()) + "}}"
+COLORS = {key:f"var(--{key})" for key in THEMES["light"]}
+
 def width(value, size, font="sans", spacing=0):
     total = 0
     for ch in value:
@@ -48,7 +54,7 @@ def box(x,y,w,h,fill,stroke="none",r=0):
     return f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="{r}" fill="{fill}" stroke="{stroke}"/>'
 
 def save(name,w,h,label,body,defs=""):
-    css=FACES+"""
+    css=FACES+THEME_CSS+"""
     .enter-rise{animation:profile-rise 720ms cubic-bezier(.22,1,.36,1) both}
     @keyframes profile-rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
     .enter-word{animation:profile-word 900ms cubic-bezier(.22,1,.36,1) both}
@@ -120,19 +126,19 @@ PROJECTS = [
 ]
 INTRO = "Focused on Rust, IM and AI agents. Building and optimizing software across programming languages. Creator of HuLa and Kyormar."
 
-def build(theme, c):
+def build(c):
     body = motion(portrait(c), "fade", .1)
     body += animated_segments(["Rust, ", "IM"], 48, 121, 44, c["fg"], .15)
     body += animated_segments(["and ", "AI ", "agents."], 48, 173, 44, c["fg"], .29)
     body += txt("Building and optimizing software", 49, 233, 17.5, c["secondary"], cls="enter-rise", delay=.43)
     body += txt("across programming languages.", 49, 259, 17.5, c["secondary"], cls="enter-rise", delay=.49)
     body += txt("Creator of HuLa and Kyormar.", 49, 313, 20, c["fg"], "medium", cls="enter-rise", delay=.55)
-    save(f"hero-{theme}.svg", 880, 460, INTRO, body)
+    save("hero.svg", 880, 460, INTRO, body)
 
     title = "Featured projects"
     body = animated_segments(["Featured ", "projects"], 440-width(title, 30, "medium")/2, 46, 30, c["fg"])
     body += txt("HuLa · Kyormar", 440, 78, 15, c["secondary"], align="middle", cls="enter-rise", delay=.2)
-    save(f"h-featured-{theme}.svg", 880, 96, title, body)
+    save("h-featured.svg", 880, 96, title, body)
 
     for slug, name, desc, chips in PROJECTS:
         filename = "hula-desktop.webp" if slug == "hula" else "kyormar-home-en.jpg"
@@ -153,7 +159,7 @@ def build(theme, c):
             chips_svg += part
             x += w+6
         body += motion(chips_svg, delay=.14)
-        save(f"card-{slug}-{theme}.svg", 432, 376, name+" — "+' '.join(desc)+note, body, defs)
+        save(f"card-{slug}.svg", 432, 376, name+" — "+' '.join(desc)+note, body, defs)
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
@@ -162,6 +168,5 @@ if __name__ == "__main__":
     args = parser.parse_args()
     if args.refresh_avatar:
         refresh_avatar(args.username)
-    for theme, colors in THEMES.items():
-        build(theme, colors)
-    print("Built hero and HuLa/Kyormar cards in both themes.")
+    build(COLORS)
+    print("Built adaptive hero and HuLa/Kyormar cards.")

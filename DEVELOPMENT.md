@@ -23,27 +23,30 @@ GitHub itself controls the padding around published README content; an SVG
 cannot remove that host-page padding. All portrait pixels fit inside the hero's
 880 x 460 viewBox; no negative offset or bottom crop is used.
 
-Edit `scripts/build_profile.py` to change copy and regenerate both themes. Links
+Edit `scripts/build_profile.py` to change copy and regenerate the adaptive assets. Links
 and accessible descriptions live in `README.md`. The SVGs contain 900 ms
 staggered blur/reveal, 720 ms rise and 1100 ms image fade. Reduced-motion settings
 disable animation. Preview controls and cache-busting URLs are local only.
 
 ## GitHub theme selection
 
-Each image and its wrapping link have a dark and light variant tagged with
-`#gh-dark-mode-only` or `#gh-light-mode-only`. GitHub's CSS matches the wrapping
-link's `href` suffix and uses its selected page theme to hide the other
-variant. A `picture` media query can instead follow the browser/OS preference,
-which may disagree with the user's GitHub appearance setting. These fragments
-keep hero text, portrait lines, headings and card surfaces in the same theme.
-Project links retain their official website destinations; the theme fragments
-do not alter the requested server URL.
+Each section uses one adaptive SVG. Inside the SVG, CSS variables switch with
+`prefers-color-scheme`; for an SVG embedded as an image, that query inherits the
+embedding element's actual `color-scheme`. Text, portrait lines, card surfaces
+and borders therefore follow the page's visible theme.
 
-The preview uses `data-color-mode` and fragment visibility rules, just like the
-GitHub page, rather than overriding media queries. Replay URLs preserve the
-theme fragments. Verify that exactly four images are visible, all in the
-selected theme, including after replay; also check GitHub with a manually
-selected dark theme while the OS/browser prefers light.
+Do not replace this with HTML `picture` media queries or GitHub theme fragments:
+those can follow the OS/day-night mode rather than the actual selected palette.
+In particular, GitHub can use `data-color-mode="auto"` with both
+`data-light-theme="dark"` and `data-dark-theme="dark"`, even while the OS is light.
+The previous fragment-based implementation displayed the light images there.
+
+The preview sets the host page's `color-scheme` and leaves image selection alone.
+Verify the same four SVG URLs under light and dark host color schemes, including
+with the opposite OS preference, and replay the animation. No duplicate images,
+theme-specific link fragments or JavaScript are required in the README.
+
+Reference: <https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@media/prefers-color-scheme#embedded_elements>.
 
 ## Avatar refresh
 
