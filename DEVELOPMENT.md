@@ -28,6 +28,23 @@ and accessible descriptions live in `README.md`. The SVGs contain 900 ms
 staggered blur/reveal, 720 ms rise and 1100 ms image fade. Reduced-motion settings
 disable animation. Preview controls and cache-busting URLs are local only.
 
+## GitHub theme selection
+
+Each image and its wrapping link have a dark and light variant tagged with
+`#gh-dark-mode-only` or `#gh-light-mode-only`. GitHub's CSS matches the wrapping
+link's `href` suffix and uses its selected page theme to hide the other
+variant. A `picture` media query can instead follow the browser/OS preference,
+which may disagree with the user's GitHub appearance setting. These fragments
+keep hero text, portrait lines, headings and card surfaces in the same theme.
+Project links retain their official website destinations; the theme fragments
+do not alter the requested server URL.
+
+The preview uses `data-color-mode` and fragment visibility rules, just like the
+GitHub page, rather than overriding media queries. Replay URLs preserve the
+theme fragments. Verify that exactly four images are visible, all in the
+selected theme, including after replay; also check GitHub with a manually
+selected dark theme while the OS/browser prefers light.
+
 ## Avatar refresh
 
 The avatar belongs to the GitHub profile owner (`nongyehong`), not to each reader

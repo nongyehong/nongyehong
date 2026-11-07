@@ -19,11 +19,10 @@ document.querySelector('#replay-motion').addEventListener('click', () => {
     image.style.aspectRatio = `${image.naturalWidth} / ${image.naturalHeight}`;
     if (!image.hasAttribute('width')) image.style.width = `${image.naturalWidth}px`;
   }
-  for (const element of document.querySelectorAll('article source[srcset], article img[src]')) {
-    const attribute = element.tagName === 'SOURCE' ? 'srcset' : 'src';
-    const url = new URL(element.getAttribute(attribute), location.href);
+  for (const element of document.querySelectorAll('article img[src]')) {
+    const url = new URL(element.getAttribute('src'), location.href);
     url.searchParams.set('preview', token);
-    element.setAttribute(attribute, url.pathname + url.search);
+    element.setAttribute('src', url.pathname + url.search + url.hash);
   }
   replays += 1;
   showStatus();

@@ -25,16 +25,17 @@ async function render() {
 }
 
 function page(html,dark,mobile) {
-  // Only the local preview overrides source selection; README remains unmodified.
-  html = html.replaceAll('media="(prefers-color-scheme: dark)"',`media="${dark?'all':'not all'}"`);
   // A fresh image URL starts a fresh SVG timeline, even if the browser reuses
   // decoded image documents across navigations. This never changes README.md.
   const replayToken = randomUUID();
-  html = html.replace(/\b(src|srcset)="(assets\/[^"?]+\.svg)"/g,(_,attribute,source)=>`${attribute}="${source}?preview=${replayToken}"`);
+  html = html.replace(/\b(src|srcset)="(assets\/[^"?#]+\.svg)(#[^"]+)?"/g,(_,attribute,source,fragment)=>`${attribute}="${source}?preview=${replayToken}${fragment || ''}"`);
   const query = (d,m)=>`/?theme=${d?'dark':'light'}&width=${m?'mobile':'desktop'}`;
-  return `<!doctype html><html lang="en" data-theme="${dark?'dark':'light'}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dawn · Local README preview</title><style>
+  return `<!doctype html><html lang="en" data-color-mode="${dark?'dark':'light'}" data-light-theme="light" data-dark-theme="dark"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Dawn · Local README preview</title><style>
   :root{color-scheme:${dark?'dark':'light'};--bg:${dark?'#0d1117':'#fff'};--fg:${dark?'#e6edf3':'#1f2328'};--muted:${dark?'#9198a1':'#59636e'};--border:${dark?'#3d444d':'#d1d9e0'};--subtle:${dark?'#151b23':'#f6f8fa'};--link:${dark?'#79c0ff':'#0969da'}}
   *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif}
+  /* GitHub theme fragments follow the site's selected theme, not the OS. */
+  [data-color-mode=light] .markdown-body [href$="#gh-dark-mode-only"],
+  [data-color-mode=dark] .markdown-body [href$="#gh-light-mode-only"]{display:none}
   a{color:var(--link);text-decoration:none}a:hover{text-decoration:underline}a:focus-visible,summary:focus-visible{outline:2px solid var(--link);outline-offset:4px}
   .toolbar{position:sticky;top:0;z-index:10;background:var(--subtle);border-bottom:1px solid var(--border);padding:12px 20px;display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap;font-size:13px}.toolbar strong{font-size:14px}.toolbar nav{display:flex;gap:8px}.toolbar a{padding:4px 9px;border:1px solid var(--border);border-radius:6px;color:var(--fg)}.toolbar a[aria-current=true]{background:var(--fg);color:var(--bg)}
   .toolbar button{font:inherit;padding:4px 9px;border:1px solid var(--border);border-radius:6px;background:var(--bg);color:var(--fg);cursor:pointer}.toolbar button:hover{border-color:var(--fg)}.toolbar button:focus-visible{outline:2px solid var(--link);outline-offset:3px}
