@@ -1,21 +1,8 @@
-### My Activities
+<div align="center">
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/hero-dark.svg"><img src="assets/hero-light.svg" alt="Focused on Rust, IM and AI agents. Building and optimizing software across programming languages. Creator of HuLa and Kyormar." width="100%"></picture>
+<br><br>
+<picture><source media="(prefers-color-scheme: dark)" srcset="assets/h-featured-dark.svg"><img src="assets/h-featured-light.svg" alt="Featured projects — HuLa and Kyormar" width="100%"></picture>
 
-<!--START_SECTION:waka-->
+<a href="https://hulaspark.com"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/card-hula-dark.svg"><img src="assets/card-hula-light.svg" alt="HuLa — cross-platform instant messaging built with Rust, Tauri and Vue 3. Visit the official website." width="46%"></picture></a>&nbsp;<a href="https://kyormar.ai"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/card-kyormar-dark.svg"><img src="assets/card-kyormar-light.svg" alt="Kyormar — native Agent and IM workspace. English homepage screenshot. Visit the official website." width="46%"></picture></a>
 
-```txt
-From: 31 October 2025 - To: 31 October 2026
-
-Total Time: 1,904 hrs 40 mins
-
-Rust                 938 hrs 2 mins        ████████████▒░░░░░░░░░░░░   49.25 %
-Markdown             264 hrs 5 mins        ███▒░░░░░░░░░░░░░░░░░░░░░   13.87 %
-Vue.js               205 hrs 34 mins       ██▓░░░░░░░░░░░░░░░░░░░░░░   10.79 %
-Other                138 hrs 51 mins       █▓░░░░░░░░░░░░░░░░░░░░░░░   07.29 %
-TypeScript           100 hrs 22 mins       █▒░░░░░░░░░░░░░░░░░░░░░░░   05.27 %
-```
-
-<!--END_SECTION:waka-->
-
-### My GitHub Contributions
-
-![](./profile-3d-contrib/profile-gitblock.svg)
+</div>
